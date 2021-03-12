@@ -14,7 +14,7 @@ os.environ['AWS_ACCESS_KEY_ID'] = config['AWS']['AWS_ACCESS_KEY_ID']
 os.environ['AWS_SECRET_ACCESS_KEY'] = config['AWS']['AWS_SECRET_ACCESS_KEY']
 
 
-def create_spark_session():
+def gitcreate_spark_session():
     spark = SparkSession \
         .builder \
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -33,7 +33,7 @@ def process_song_data(spark, input_data, output_data):
     """
     
     # filepath to song data file
-    song_data = "{}song_data/A/B/C/*.json".format(input_data)
+    song_data = "{}song_data/*/*/*/*.json".format(input_data)
     
     # reading song data file
     df_songs = spark.read.json(song_data)
@@ -63,7 +63,7 @@ def process_log_data(spark, input_data, output_data):
     """
     
     #  filepath to log data file
-    log_data = "{}log_data/2018/11/*-events.json".format(input_data)
+    log_data = "{}log_data/*/*/*-events.json".format(input_data)
 
     # read log data file
     df_logs = spark.read.json(log_data).distinct()
